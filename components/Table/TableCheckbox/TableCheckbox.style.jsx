@@ -2,14 +2,12 @@ import styled from "styled-components";
 
 export const CheckBoxContainer = styled.div`
   display: flex;
-  width: 50px;
   justify-content: space-evenly;
   margin: 10px 10px;
 `;
 
 export const CheckBoxLabel = styled.label`
   font-size: 14px;
-  font-weight: bold;
   text-align: center;
 `;
 
@@ -31,7 +29,7 @@ export const TableTitle = styled.h2`
 `;
 
 export const Table = styled.table`
-  width: 400px;
+  width: 450px;
   background-color: #f2f2f29a;
   border-radius: 4px;
   margin: 10px 10px;

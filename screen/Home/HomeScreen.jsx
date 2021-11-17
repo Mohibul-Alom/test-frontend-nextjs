@@ -63,10 +63,11 @@ export default function HomeScreen() {
           const auxData = getData(section);
           return (
             <TableCheckbox
-              key={index}
+              key={`table${index}`}
               title={auxData.title}
               column={auxData.column}
               row={auxData.row}
+              parentKey={index}
             />
           );
         })}
