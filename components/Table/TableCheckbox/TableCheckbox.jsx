@@ -11,6 +11,22 @@ import {
   TableTitle,
 } from "./TableCheckbox.style";
 
+const renderCheckbox = (show) => {
+  if (show) {
+    return (
+      <TableData>
+        <CheckBox type="checkbox" />
+      </TableData>
+    );
+  } else {
+    return (
+      <TableData>
+        <></>
+      </TableData>
+    );
+  }
+};
+
 export default function TableCheckbox({ title, column, row = {} }) {
   return (
     <div>
@@ -39,65 +55,11 @@ export default function TableCheckbox({ title, column, row = {} }) {
                       <CheckBoxLabel>{row[sigleRow].title}</CheckBoxLabel>
                     </DataContainer>
                   </TableData>
-
-                  {row[sigleRow].checkbox["create"] && (
-                    <TableData>
-                      <CheckBox type="checkbox" />
-                    </TableData>
-                  )}
-
-                  {!row[sigleRow].checkbox["create"] && (
-                    <TableData>
-                      <></>
-                    </TableData>
-                  )}
-
-                  {row[sigleRow].checkbox["view"] && (
-                    <TableData>
-                      <CheckBox type="checkbox" />
-                    </TableData>
-                  )}
-
-                  {!row[sigleRow].checkbox["view"] && (
-                    <TableData>
-                      <></>
-                    </TableData>
-                  )}
-
-                  {row[sigleRow].checkbox["update"] && (
-                    <TableData>
-                      <CheckBox type="checkbox" />
-                    </TableData>
-                  )}
-
-                  {!row[sigleRow].checkbox["update"] && (
-                    <TableData>
-                      <></>
-                    </TableData>
-                  )}
-
-                  {row[sigleRow].checkbox["delete"] && (
-                    <TableData>
-                      <CheckBox type="checkbox" />
-                    </TableData>
-                  )}
-
-                  {!row[sigleRow].checkbox["delete"] && (
-                    <TableData>
-                      <></>
-                    </TableData>
-                  )}
-
-                  {row[sigleRow].checkbox["all"] && (
-                    <TableData>
-                      <CheckBox type="checkbox" />
-                    </TableData>
-                  )}
-                  {!row[sigleRow].checkbox["all"] && (
-                    <TableData>
-                      <></>
-                    </TableData>
-                  )}
+                  {renderCheckbox(row[sigleRow].checkbox["create"])}
+                  {renderCheckbox(row[sigleRow].checkbox["view"])}
+                  {renderCheckbox(row[sigleRow].checkbox["update"])}
+                  {renderCheckbox(row[sigleRow].checkbox["delete"])}
+                  {renderCheckbox(row[sigleRow].checkbox["all"])}
                 </TableRow>
               );
             })}
