@@ -1,0 +1,29 @@
+{
+  "sections": [
+    {
+      "title": "Usuarios y Permisos",
+      "permissions": [
+        {
+          "id": "usuarios",
+          "actions": "CRUD",
+          "description": "Usuarios Manager"
+        },
+        {
+          "id": "usuariosnegocio",
+          "actions": "CRUD",
+          "description": "Usuarios Negocio"
+        },
+        {
+          "id": "usuariosweb",
+          "actions": "CRUD",
+          "description": "Usuarios Web"
+        },
+        {
+          "id": "roles",
+          "actions": "CRUD",
+          "description": "Roles"
+        }
+      ]
+    }
+  ]
+}

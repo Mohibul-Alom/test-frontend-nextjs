@@ -5,8 +5,6 @@
 /.pnp
 .pnp.js
 
-# dir ignore
-/ignore
 
 # testing
 /coverage
