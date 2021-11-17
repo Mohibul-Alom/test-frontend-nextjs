@@ -1,5 +1,5 @@
 {
-  "name": "boilplate-nextjs-styled",
+  "name": "test-frontend-nextjs",
   "private": true,
   "scripts": {
     "dev": "next dev",
