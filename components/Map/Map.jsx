@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
 import { icon } from "leaflet";
-import { useState } from "react";
 
 const ICON = icon({
   iconUrl: "/marker-icon.png",
@@ -19,7 +18,7 @@ export default ({
   zoom = 10,
 }) => {
   L.Icon.Default.imagePath = "/marker-icon.png";
-  console.log(width, height);
+
   return (
     <Map center={center} zoom={zoom} style={{ height: height, width: width }}>
       <TileLayer
@@ -27,9 +26,8 @@ export default ({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {Object.keys(markers).map((index) => {
-        console.log(index);
         return (
-          <Marker position={markers[index]} icon={ICON}>
+          <Marker key={`map${index}`} position={markers[index]} icon={ICON}>
             <Popup>
               <>
                 A pretty CSS3 popup. <br /> Easily customizable.
@@ -38,13 +36,6 @@ export default ({
           </Marker>
         );
       })}
-      <Marker position={[51.505, -0.09]} icon={ICON}>
-        <Popup>
-          <>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </>
-        </Popup>
-      </Marker>
     </Map>
   );
 };
