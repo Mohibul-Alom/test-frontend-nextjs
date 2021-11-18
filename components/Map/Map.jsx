@@ -10,13 +10,13 @@ const ICON = icon({
   iconSize: [32, 50],
 });
 
-export default ({
+export default function MyMap({
   markers,
   center,
   width = "400px",
   height = "400px",
   zoom = 10,
-}) => {
+}) {
   L.Icon.Default.imagePath = "/marker-icon.png";
 
   return (
@@ -38,4 +38,4 @@ export default ({
       })}
     </Map>
   );
-};
+}
