@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
 }
 
 a {
@@ -13,4 +13,14 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+@import "leaflet/dist/leaflet.css";
+@import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+@import "leaflet-defaulticon-compatibility";
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background-color: red;
+  color: #fff;
 }
