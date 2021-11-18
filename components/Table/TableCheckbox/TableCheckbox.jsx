@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import {
   CheckBox,
   CheckBoxLabel,
@@ -12,28 +12,30 @@ import {
   TableTitle,
 } from "./TableCheckbox.style";
 
-const renderCheckbox = (show, id) => {
-  if (show) {
-    return (
-      <TableData>
-        <CheckBox id={id} onChange={handleChecked} type="checkbox" />
-      </TableData>
-    );
-  } else {
-    return (
-      <TableData>
-        <></>
-      </TableData>
-    );
-  }
-};
-
-const handleChecked = (e) => {
-  //TODO: save the ckeck state in a object to transform it later to json
-  console.log("handleChecked-->", e.target.id, "---", e.target.checked);
-};
-
 export default function TableCheckbox({ title, column, row, parentKey }) {
+  const ref = useRef([]);
+
+  const handleChecked = (e) => {
+    //TODO: save the ckeck state in a object to transform it later to json
+    console.log("check-->", e.target.id, "---", e.target.checked);
+  };
+
+  const renderCheckbox = (show, id, ref, parentKey) => {
+    if (show) {
+      return (
+        <TableData>
+          <CheckBox id={id} onChange={handleChecked} type="checkbox" />
+        </TableData>
+      );
+    } else {
+      return (
+        <TableData>
+          <></>
+        </TableData>
+      );
+    }
+  };
+
   return (
     <div>
       <TableContainer>
@@ -61,23 +63,27 @@ export default function TableCheckbox({ title, column, row, parentKey }) {
                   </TableData>
                   {renderCheckbox(
                     row[sigleRow].checkbox["create"],
-                    `check_${parentKey}_${sigleRow}_0`
+                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_C`,
+                    ref,
+                    parentKey
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["view"],
-                    `check_${parentKey}_${sigleRow}_1`
+                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_R`,
+                    ref,
+                    parentKey
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["update"],
-                    `check_${parentKey}_${sigleRow}_2`
+                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_U`,
+                    ref,
+                    parentKey
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["delete"],
-                    `check_${parentKey}_${sigleRow}_3`
-                  )}
-                  {renderCheckbox(
-                    row[sigleRow].checkbox["all"],
-                    `check_${parentKey}_${sigleRow}_4`
+                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_D`,
+                    ref,
+                    parentKey
                   )}
                 </TableRow>
               );
@@ -88,3 +94,5 @@ export default function TableCheckbox({ title, column, row, parentKey }) {
     </div>
   );
 }
+
+const KEY = {};

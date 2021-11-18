@@ -5,23 +5,24 @@ import { HomeContainer } from "./HomeScreen.styled";
 import rol from "../../ignore/rol.json";
 
 export default function HomeScreen() {
-  const getHeader = ["", "Create", "View", "Edit", "Delete", "All"];
+  const getHeader = ["", "Create", "View", "Edit", "Delete"];
 
   const getRow = (permissions) => {
     let auxRow = [];
     permissions.forEach((element) => {
       let sigleRow = {
         title: "",
+        id: "",
         checkbox: {
           create: false,
           delete: false,
           update: false,
           view: false,
-          all: false,
         },
       };
 
       sigleRow.title = element.description;
+      sigleRow.id = element.id;
       for (let key in element) {
         if (Object.hasOwnProperty.call(element, key) && key === "actions") {
           const action = element[key];
@@ -38,10 +39,6 @@ export default function HomeScreen() {
           action.includes("D")
             ? (sigleRow.checkbox.delete = true)
             : (sigleRow.checkbox.delete = false);
-
-          action.length === 4
-            ? (sigleRow.checkbox.all = true)
-            : (sigleRow.checkbox.all = false);
           auxRow.push({ ...sigleRow });
         }
       }
@@ -63,11 +60,11 @@ export default function HomeScreen() {
           const auxData = getData(section);
           return (
             <TableCheckbox
-              key={`table${index}`}
+              key={`table${index + 1}`}
               title={auxData.title}
               column={auxData.column}
               row={auxData.row}
-              parentKey={index}
+              parentKey={index + 1}
             />
           );
         })}
@@ -75,3 +72,10 @@ export default function HomeScreen() {
     </Container>
   );
 }
+
+const ID = {
+  usuarios: {
+    C: false,
+    R: false,
+  },
+};
