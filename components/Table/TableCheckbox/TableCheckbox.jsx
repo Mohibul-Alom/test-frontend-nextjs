@@ -1,4 +1,4 @@
-import { useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import {
   CheckBox,
   CheckBoxLabel,
@@ -12,19 +12,40 @@ import {
   TableTitle,
 } from "./TableCheckbox.style";
 
-export default function TableCheckbox({ title, column, row, parentKey }) {
+export default function TableCheckbox({
+  title,
+  column,
+  row,
+  parentKey,
+  allowAll,
+  valuePermission,
+  setValuePermission,
+}) {
   const ref = useRef([]);
 
-  const handleChecked = (e) => {
-    //TODO: save the ckeck state in a object to transform it later to json
-    console.log("check-->", e.target.id, "---", e.target.checked);
+  const handleChecked = (id, permission) => {
+    setValuePermission({
+      ...valuePermission,
+      [id]: {
+        ...valuePermission[id],
+        [permission]: !valuePermission[id][permission],
+      },
+    });
   };
 
-  const renderCheckbox = (show, id, ref, parentKey) => {
+  console.log("value-->", valuePermission);
+
+  const renderCheckbox = (show, id, permission, index, parentKey) => {
     if (show) {
+      console.log({ value: valuePermission[id][permission] });
       return (
         <TableData>
-          <CheckBox id={id} onChange={handleChecked} type="checkbox" />
+          <CheckBox
+            id={id}
+            onChange={() => handleChecked(id, permission)}
+            type="checkbox"
+            checked={valuePermission[id][permission]}
+          />
         </TableData>
       );
     } else {
@@ -35,6 +56,32 @@ export default function TableCheckbox({ title, column, row, parentKey }) {
       );
     }
   };
+
+  useEffect(() => {
+    changeCheckbox(allowAll);
+  }, [allowAll]);
+
+  let i = 0;
+
+  const changeCheckbox = () => {
+    console.log("changeCheckbox--> cambiar todos los checkbox a true", i);
+  };
+
+  const addToRef = (myref) => {
+    if (myref && !ref.current.includes(myref)) {
+      ref.current.push(myref);
+    }
+  };
+
+  //   const refResult = useRef([]);
+  //   refResult.current = [];
+  //   const addToRefs = (el: never) => {
+  //     if (el && !refResult.current.includes(el)) {
+  //       refResult.current.push(el);
+  //     }
+  //   };
+
+  // <OrderStyles.Card ref={addToRefs}>
 
   return (
     <div>
@@ -63,26 +110,30 @@ export default function TableCheckbox({ title, column, row, parentKey }) {
                   </TableData>
                   {renderCheckbox(
                     row[sigleRow].checkbox["create"],
-                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_C`,
-                    ref,
+                    `${row[sigleRow].id}`,
+                    "C",
+                    sigleRow,
                     parentKey
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["view"],
-                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_R`,
-                    ref,
+                    `${row[sigleRow].id}`,
+                    "R",
+                    sigleRow,
                     parentKey
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["update"],
-                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_U`,
-                    ref,
+                    `${row[sigleRow].id}`,
+                    "U",
+                    sigleRow,
                     parentKey
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["delete"],
-                    `${row[sigleRow].id}_${parentKey}_${sigleRow}_D`,
-                    ref,
+                    `${row[sigleRow].id}`,
+                    "D",
+                    sigleRow,
                     parentKey
                   )}
                 </TableRow>
