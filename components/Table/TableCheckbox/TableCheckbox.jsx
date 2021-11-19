@@ -1,4 +1,3 @@
-import { useEffect, useReducer, useRef, useState } from "react";
 import {
   CheckBox,
   CheckBoxLabel,
@@ -21,8 +20,6 @@ export default function TableCheckbox({
   valuePermission,
   setValuePermission,
 }) {
-  const ref = useRef([]);
-
   const handleChecked = (id, permission) => {
     setValuePermission({
       ...valuePermission,
@@ -33,11 +30,8 @@ export default function TableCheckbox({
     });
   };
 
-  console.log("value-->", valuePermission);
-
-  const renderCheckbox = (show, id, permission, index, parentKey) => {
+  const renderCheckbox = (show, id, permission) => {
     if (show) {
-      console.log({ value: valuePermission[id][permission] });
       return (
         <TableData>
           <CheckBox
@@ -56,32 +50,6 @@ export default function TableCheckbox({
       );
     }
   };
-
-  useEffect(() => {
-    changeCheckbox(allowAll);
-  }, [allowAll]);
-
-  let i = 0;
-
-  const changeCheckbox = () => {
-    console.log("changeCheckbox--> cambiar todos los checkbox a true", i);
-  };
-
-  const addToRef = (myref) => {
-    if (myref && !ref.current.includes(myref)) {
-      ref.current.push(myref);
-    }
-  };
-
-  //   const refResult = useRef([]);
-  //   refResult.current = [];
-  //   const addToRefs = (el: never) => {
-  //     if (el && !refResult.current.includes(el)) {
-  //       refResult.current.push(el);
-  //     }
-  //   };
-
-  // <OrderStyles.Card ref={addToRefs}>
 
   return (
     <div>
@@ -111,30 +79,22 @@ export default function TableCheckbox({
                   {renderCheckbox(
                     row[sigleRow].checkbox["create"],
                     `${row[sigleRow].id}`,
-                    "C",
-                    sigleRow,
-                    parentKey
+                    "C"
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["view"],
                     `${row[sigleRow].id}`,
-                    "R",
-                    sigleRow,
-                    parentKey
+                    "R"
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["update"],
                     `${row[sigleRow].id}`,
-                    "U",
-                    sigleRow,
-                    parentKey
+                    "U"
                   )}
                   {renderCheckbox(
                     row[sigleRow].checkbox["delete"],
                     `${row[sigleRow].id}`,
-                    "D",
-                    sigleRow,
-                    parentKey
+                    "D"
                   )}
                 </TableRow>
               );
@@ -145,5 +105,3 @@ export default function TableCheckbox({
     </div>
   );
 }
-
-const KEY = {};

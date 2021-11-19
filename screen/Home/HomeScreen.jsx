@@ -10,8 +10,6 @@ export default function HomeScreen() {
     getValuePermission(rol.sections)
   );
 
-  console.log("value", valuePermission);
-
   const getHeader = ["", "Create", "View", "Edit", "Delete"];
 
   const getRow = (permissions) => {
@@ -61,7 +59,6 @@ export default function HomeScreen() {
   };
 
   const handleAllow = () => {
-    console.log("setAllow", setAllowAll(valuePermission));
     setValuePermission(setAllowAll(valuePermission));
   };
 
