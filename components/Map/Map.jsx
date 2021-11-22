@@ -15,7 +15,8 @@ export default function MyMap({
   center,
   width = "400px",
   height = "400px",
-  zoom = 10,
+  zoom = 6,
+  popUp,
 }) {
   L.Icon.Default.imagePath = "/marker-icon.png";
 
@@ -30,7 +31,12 @@ export default function MyMap({
           <Marker key={`map${index}`} position={markers[index]} icon={ICON}>
             <Popup>
               <>
-                A pretty CSS3 popup. <br /> Easily customizable.
+                {popUp}
+                {!popUp && (
+                  <>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                  </>
+                )}
               </>
             </Popup>
           </Marker>

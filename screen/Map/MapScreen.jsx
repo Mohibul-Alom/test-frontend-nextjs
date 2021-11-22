@@ -13,6 +13,10 @@ const LOCATIONS = {
   7: [40.415939131934245, -3.7404023095019396],
 };
 
+const CustomPopUp = () => {
+  return <div>Holaa from customPopUp</div>;
+};
+
 export default function MapScreen() {
   const Map = dynamic(() => import("../../components/Map/Map"), {
     ssr: false,
@@ -23,11 +27,12 @@ export default function MapScreen() {
       <MapScreenContainer>
         <MapConainer>
           <Map
-            height={"800px"}
-            width={"800px"}
+            height={"600px"}
+            width={"600px"}
             center={LOCATIONS[0]}
             markers={LOCATIONS}
             zoom={6}
+            popUp={CustomPopUp()}
           />
         </MapConainer>
       </MapScreenContainer>
