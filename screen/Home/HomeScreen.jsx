@@ -1,9 +1,13 @@
 import TableCheckbox from "../../components/Table/TableCheckbox/TableCheckbox";
 import { Container } from "../../styles/globalStyle";
-import { HomeContainer, HomeButton } from "./HomeScreen.styled";
+import {
+  HomeContainer,
+  HomeButton,
+  HomeButtonContainer,
+} from "./HomeScreen.styled";
 
 import rol from "../../ignore/rol.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HomeScreen() {
   const [valuePermission, setValuePermission] = useState(
@@ -62,15 +66,43 @@ export default function HomeScreen() {
     setValuePermission(setAllowAll(valuePermission));
   };
 
-  const handleCheck = () => {
-    console.log(isAllowAll(valuePermission));
+  const handleSave = () => {
+    if (isAllowAll(valuePermission)) {
+      const res = JSON.stringify({ ALL: "allow" });
+      console.log(res);
+    } else {
+      let res = [];
+      Object.keys(valuePermission).forEach((element) => {
+        const auxData = {
+          id: element,
+          actions: translate(valuePermission[element]),
+        };
+        res.push({ ...auxData });
+      });
+      res = JSON.stringify(res);
+      console.log(res);
+    }
+  };
+
+  const translate = (newPermission) => {
+    let newActions = [];
+
+    newPermission["C"] ? newActions.push("C") : newActions.push("");
+    newPermission["R"] ? newActions.push("R") : newActions.push("");
+    newPermission["U"] ? newActions.push("U") : newActions.push("");
+    newPermission["D"] ? newActions.push("D") : newActions.push("");
+    newActions = newActions.join("");
+
+    return newActions;
   };
 
   return (
     <Container>
       <HomeContainer>
-        <HomeButton onClick={handleAllow}>Allow</HomeButton>
-        <button onClick={handleCheck}>Check</button>
+        <HomeButtonContainer>
+          <HomeButton onClick={handleAllow}>Allow</HomeButton>
+          <HomeButton onClick={handleSave}>Save</HomeButton>
+        </HomeButtonContainer>
         {rol.sections.map((section, index) => {
           const auxData = getData(section);
           return (
@@ -119,7 +151,6 @@ const setAllPermissions = (permission) => {
 };
 
 const setAllowAll = (valuePermission) => {
-  console.log({ valuePermission });
   return Object.keys(valuePermission).reduce((acc, key) => {
     return {
       ...acc,

@@ -23,11 +23,11 @@ export default function MapScreen() {
       <MapScreenContainer>
         <MapConainer>
           <Map
-            height={"600px"}
-            width={"600px"}
-            center={LOCATIONS[5]}
+            height={"800px"}
+            width={"800px"}
+            center={LOCATIONS[0]}
             markers={LOCATIONS}
-            zoom={17}
+            zoom={6}
           />
         </MapConainer>
       </MapScreenContainer>

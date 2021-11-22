@@ -8,15 +8,18 @@ export const HomeContainer = styled.div`
   margin-top: 60px;
 `;
 
+export const HomeButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
 export const HomeButton = styled.button`
   width: 100px;
   background-color: #44c767;
   border-radius: 10px;
   border: 1px solid #18ab29;
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: inline-block;
   cursor: pointer;
   color: #ffffff;
   font-family: Arial;

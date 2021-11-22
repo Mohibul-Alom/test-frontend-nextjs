@@ -16,7 +16,6 @@ export default function TableCheckbox({
   column,
   row,
   parentKey,
-  allowAll,
   valuePermission,
   setValuePermission,
 }) {
